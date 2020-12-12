@@ -1,5 +1,5 @@
 import os
-from report_generation.config import Config
+from .config import Config
 import urllib
 from bs4 import BeautifulSoup
 import requests
