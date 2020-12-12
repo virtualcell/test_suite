@@ -36,7 +36,7 @@ def soup_scraper(model, headers):
     preview_url = preview_button_context[0]['data-download-link']
     return preview_url
 
-def download_sbml()
+def download_sbml():
     for model in create_model_list():
         sbml_file_link = Config.BASE_URL + soup_scraper(model, headers=headers)
         urllib.request.urlretrieve(sbml_file_link, os.path.join(
