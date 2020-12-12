@@ -2,7 +2,7 @@ from setuptools import setup
 import setuptools
 
 setup(
-    name='VCell_automation',
+    name='vcell_automation',
     version='0.0.1',
     description='Test suite comparing the results across',
     url='https://github.com/virtualcell',

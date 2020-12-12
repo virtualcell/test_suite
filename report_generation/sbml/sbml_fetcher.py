@@ -43,7 +43,6 @@ def download_sbml():
                 model_files_path, f'{model}.xml'))
         print(f'Downloaded {model}.xml')
 
-    
 
 if __name__ == "__main__":
    download_sbml()
