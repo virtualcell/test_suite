@@ -24,4 +24,5 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        python report_generation/sbml/sbml_fetcher.py
+        output=$(python report_generation/sbml/sbml_fetcher.py)
+        echo "::set-output name=changelog::$output"
