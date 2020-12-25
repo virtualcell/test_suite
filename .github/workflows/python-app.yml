@@ -25,7 +25,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pwd
-        ls
+        PYTHONPATH=$(pwd)
         python report_generation/sbml/sbml_fetcher.py
         
