@@ -1,2 +1,2 @@
-from .config import Config
+from .config import *
 from report_generation import *

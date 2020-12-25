@@ -120,3 +120,7 @@ tests/results/
 
 *.tmp
 .vscode/
+
+# files from local
+report_generation/files/bmdb_models/*
+!report_generation/files/bmdb_models/.gitkeep

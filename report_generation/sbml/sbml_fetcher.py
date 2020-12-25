@@ -1,5 +1,5 @@
 import os
-from .config import Config
+from report_generation.config import Config
 import urllib
 from bs4 import BeautifulSoup
 import requests
@@ -16,15 +16,15 @@ headers = Config.HEADERS
 def create_model_list():
     models_to_exclude = [649, 694, 701]
     model_name_list = list()
-    for i in range(1, 1000):
-        if i in models_to_exclude:
+    for model_num in range(1, 1000):
+        if model_num in models_to_exclude:
             continue
-        if i < 10:
-            model_name_list.append("BIOMD" + "000000000" + f"{i}")
-        elif i >= 10 and i < 100:
-            model_name_list.append("BIOMD" + "00000000" + f"{i}")
+        if model_num < 10:
+            model_name_list.append("BIOMD" + "000000000" + f"{model_num}")
+        elif model_num >= 10 and model_num < 100:
+            model_name_list.append("BIOMD" + "00000000" + f"{model_num}")
         else:
-            model_name_list.append("BIOMD" + "0000000" + f"{i}")
+            model_name_list.append("BIOMD" + "0000000" + f"{model_num}")
     return model_name_list
 
 
