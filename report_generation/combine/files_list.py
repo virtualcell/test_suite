@@ -1,5 +1,5 @@
 import os
-from ..config import Config
+from report_generation.config import Config
 
 omex_path = Config.OMEX_FILE_PATH
 sedml_doc_path = Config.SEDML_DOC_PATH

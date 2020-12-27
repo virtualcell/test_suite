@@ -1,6 +1,6 @@
 import os
 import sys
-from ..config import Config
+from report_generation.config import Config
 import libsbml
 import pandas as pd
 
