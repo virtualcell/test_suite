@@ -1,8 +1,8 @@
 name: CI
 
-on:
-  schedule: 
-    - cron: "0 17 * * 0"
+on: [push]
+  # schedule: 
+  #   - cron: "30 23 * * 0"
 
 jobs:
   build:
@@ -25,9 +25,14 @@ jobs:
       run: |
         PYTHONPATH=$(pwd) python report_generation/core.py
 
-    - name: 'Upload Report'
+    # Archiving results, logs, report
+    - name: 'Archive results, logs, report'
+      working-directory: ${{runner.workspace}}/test_suite
+      run: zip -r artifact_`date +'%m_%d_%Y'`.zip report_generation/files/logs report_generation/files/results report.txt
+    
+    - name: 'Upload artifacts'
       uses: actions/upload-artifact@v2
       with:
         name: comparison_report
-        path: report.txt
+        path: artifact_`date +'%m_%d_%Y'`.zip
 
