@@ -6,11 +6,11 @@
 """
 
 import os
-from report_generation.config import Config
+from ..config import Config
 import libsbml
 import libsedml
 
-# TODO: Make pip package
+
 model_files_path = Config.MODEL_FILES_PATH
 
 sedml_doc_path = Config.SEDML_DOC_PATH
@@ -121,14 +121,14 @@ def create_sedml(filename, simulator,
     libsedml.writeSedML(doc, os.path.join(sedml_doc_path, simulator, f'{filename}.sedml'))
     print(f"SED-ML Document created for {simulator} with filename {filename}.sedml")
 
-
-for sbml_model in model_files:
-    if sbml_model.split('.')[1] == 'xml':
-        model_name = sbml_model.split('.xml')[0]
-        create_sedml(model_name, 'vcell')
-        create_sedml(model_name, 'copasi')
-    elif sbml_model.split('.')[1] != 'xml':
-        print(f"{sbml_model} is not a model file\n")
-    else:
-        print(f"No SBML files found in the directory {os.path.join(model_files_path)}\n")
+def gen_sedml():
+    for sbml_model in model_files:
+        if sbml_model.split('.')[1] == 'xml':
+            model_name = sbml_model.split('.xml')[0]
+            create_sedml(model_name, 'vcell')
+            create_sedml(model_name, 'copasi')
+        elif sbml_model.split('.')[1] != 'xml':
+            print(f"{sbml_model} is not a model file\n")
+        else:
+            print(f"No SBML files found in the directory {os.path.join(model_files_path)}\n")
 

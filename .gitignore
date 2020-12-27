@@ -124,3 +124,27 @@ tests/results/
 # files from local
 report_generation/files/bmdb_models/*
 !report_generation/files/bmdb_models/.gitkeep
+
+report_generation/files/sedml_docs/copasi/*
+!report_generation/files/sedml_docs/copasi/.gitkeep
+
+report_generation/files/sedml_docs/vcell/*
+!report_generation/files/sedml_docs/vcell/.gitkeep
+
+report_generation/files/omex_archives/copasi/*
+!report_generation/files/omex_archives/copasi/.gitkeep
+
+report_generation/files/omex_archives/vcell/*
+!report_generation/files/omex_archives/copasi/.gitkeep
+
+report_generation/files/logs/copasi/*
+!report_generation/files/logs/copasi/.gitkeep
+
+report_generation/files/logs/vcell/*
+!report_generation/files/logs/vcell/.gitkeep
+
+report_generation/files/results/vcell/*
+!report_generation/files/results/vcell/.gitkeep
+
+report_generation/files/results/copasi/*
+!report_generation/files/results/copasi/.gitkeep

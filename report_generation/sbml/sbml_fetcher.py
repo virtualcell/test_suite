@@ -13,10 +13,10 @@ model_files = os.listdir(os.path.abspath(
 
 headers = Config.HEADERS
 
-def create_model_list():
+def create_model_list(start=1, end=1000, step=1):
     models_to_exclude = [649, 694, 701]
     model_name_list = list()
-    for model_num in range(1, 1000):
+    for model_num in range(start, end, step):
         if model_num in models_to_exclude:
             continue
         if model_num < 10:
@@ -36,13 +36,14 @@ def soup_scraper(model, headers):
     preview_url = preview_button_context[0]['data-download-link']
     return preview_url
 
-def download_sbml():
-    for model in create_model_list():
-        sbml_file_link = Config.BASE_URL + soup_scraper(model, headers=headers)
-        urllib.request.urlretrieve(sbml_file_link, os.path.join(
-                model_files_path, f'{model}.xml'))
-        print(f'Downloaded {model}.xml')
+def download_sbml(): 
+    for model in create_model_list(5, 0, -1):
+        try: 
+            sbml_file_link = Config.BASE_URL + soup_scraper(model, headers=headers)
+            urllib.request.urlretrieve(sbml_file_link, os.path.join(
+                    model_files_path, f'{model}.xml'))
+            print(f'Downloaded {model}.xml')
+        except IndexError as IE:
+            print(f"{model}.xml is not published yet.")
+            continue
 
-
-if __name__ == "__main__":
-   download_sbml()
