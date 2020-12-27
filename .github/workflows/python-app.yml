@@ -28,3 +28,10 @@ jobs:
         PYTHONPATH=$(pwd) python report_generation/core.py
         ls
         cat report.txt
+
+    - name: 'Upload Report'
+      uses: actions/upload-artifact@v2
+      with:
+        name: Comparison_report
+        path: report.txt
+
