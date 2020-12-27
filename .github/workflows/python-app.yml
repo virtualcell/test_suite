@@ -32,6 +32,6 @@ jobs:
     - name: 'Upload Report'
       uses: actions/upload-artifact@v2
       with:
-        name: Comparison_report
+        name: comparison_report
         path: report.txt
 

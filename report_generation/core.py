@@ -6,7 +6,7 @@ import subprocess
 
 download_sbml()
 
-print("Strating to generate SED-ML")
+print("Starting to generate SED-ML")
 gen_sedml()
 print("SED-ML generation finished")
 

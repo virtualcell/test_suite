@@ -139,13 +139,14 @@ def gen_report():
 
     with open('report.txt', 'w+') as report:
 
-        print('vcell_na_csv: ', len(vcell_na_csv), file=report)
-        print('copasi_na_csv: ', len(copasi_na_csv), file=report)
-        print('comparisons_done: ', (comparisons_done), file=report)
-        print('files_10e1: ', len(files_10e1), file=report)
-        print('files_10e4: ', len(files_10e4), file=report)
-        print('files_10e12: ', len(files_10e12), file=report)
-        print('unmatching_specie_models: ', len(
+        print('CSVs (result) not available in VCell: ', len(vcell_na_csv), file=report)
+        print('CSVs (result) not available in COPASI: ',
+              len(copasi_na_csv), file=report)
+        print('Total comparisons done: ', (comparisons_done), file=report)
+        print('Files with difference of 10e1: ', len(files_10e1), file=report)
+        print('Files with difference of 10e4: ', len(files_10e4), file=report)
+        print('Files with difference of 10e12: ', len(files_10e12), file=report)
+        print('Comparisons not done due to unavailablilty of matching species in results: ', len(
             unmatching_specie_models), file=report)
 
 
