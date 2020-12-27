@@ -15,8 +15,7 @@ model_files_path = Config.MODEL_FILES_PATH
 
 sedml_doc_path = Config.SEDML_DOC_PATH
 
-model_files = os.listdir(os.path.abspath(
-    os.path.join(model_files_path)))
+model_files = []
 
 
 # NOTE: filename has to be without extension
@@ -122,6 +121,9 @@ def create_sedml(filename, simulator,
     print(f"SED-ML Document created for {simulator} with filename {filename}.sedml")
 
 def gen_sedml():
+    global model_files
+    model_files = os.listdir(os.path.abspath(
+        os.path.join(model_files_path)))
     for sbml_model in model_files:
         if sbml_model.split('.')[1] == 'xml':
             model_name = sbml_model.split('.xml')[0]

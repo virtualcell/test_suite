@@ -1,6 +1,7 @@
 #!/bin/bash
 
-cd ..
+pwd
+cd report_generation
 cd files
 cd omex_archives
 cd vcell
