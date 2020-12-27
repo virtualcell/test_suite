@@ -12,7 +12,7 @@ class FilesList:
     """[summary]
     """
 
-    def sbml_file_list(path=model_files_path):
+    def sbml_file_list(self, path=model_files_path):
         sbml_file_list = list()
         for sbml_file in os.listdir(os.path.join(path)):
             if sbml_file.endswith('.xml'):
@@ -25,7 +25,7 @@ class FilesList:
                     f"No model files found in the directory {os.path.join(os.path.join(model_files_path))}\n")
         return sbml_file_list
 
-    def vcell_sedml_files_list():
+    def vcell_sedml_files_list(self):
         vcell_sedml_file_list = list()
         for sedml_file in os.listdir(os.path.join(sedml_doc_path, 'vcell')):
             if sedml_file.endswith('.sedml'):
@@ -36,7 +36,7 @@ class FilesList:
                     f'No SED-ML documents found in the directory {os.path.join(sedml_doc_path, "vcell")}\n')
         return vcell_sedml_file_list
 
-    def copasi_sedml_files_list():
+    def copasi_sedml_files_list(self):
         copasi_sedml_file_list = list()
         for sedml_file in os.listdir(os.path.join(sedml_doc_path, 'copasi')):
             if sedml_file.endswith('.sedml'):

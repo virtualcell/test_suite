@@ -61,7 +61,7 @@ def create_omex_archive(sbml_name, sedml_name, simulator):
     print('Archive created:', out_file.split('/')[-1])
 
 class GenOmex:
-    def omex_gen_vcell():
+    def omex_gen_vcell(self):
         for sbml_file in files_list.sbml_file_list():
             for vcell_sedml_file in files_list.vcell_sedml_files_list():
                 if sbml_file.split('.')[0] == vcell_sedml_file.split('.')[0]:
@@ -69,7 +69,7 @@ class GenOmex:
                 else:
                     continue
 
-    def omex_gen_copasi():
+    def omex_gen_copasi(self):
         for sbml_file in files_list.sbml_file_list():
             for copasi_sedml_file in files_list.copasi_sedml_files_list():
                 if sbml_file.split('.')[0] == copasi_sedml_file.split('.')[0]:
