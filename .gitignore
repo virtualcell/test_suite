@@ -148,3 +148,5 @@ report_generation/files/results/vcell/*
 
 report_generation/files/results/copasi/*
 !report_generation/files/results/copasi/.gitkeep
+
+report.txt

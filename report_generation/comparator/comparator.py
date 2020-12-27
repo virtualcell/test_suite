@@ -13,6 +13,8 @@ models_dir = Config.MODEL_FILES_PATH
 
 reader = libsbml.SBMLReader()
 
+models = list()
+
 
 def get_species(model):
     global reader
@@ -44,42 +46,45 @@ def copasi_path(csv_name):
     else:
         return path
 
+def prepare_vcell_copasi_csv():
+    global models
+    models = os.listdir(models_dir)
+    models = sorted(models)
+    models.pop(0)
+    vcell_csvs = []
+    copasi_csvs = []
 
-models = os.listdir(models_dir)
-models = sorted(models)
-models.pop(0)
-vcell_csvs = []
-copasi_csvs = []
+    # Get all Vcell csv paths in list
+    for folder in os.listdir(vcell_results_csv_dir):
+        if folder not in ['.DS_Store', '.gitkeep']:
+            files = os.listdir(os.path.join(vcell_results_csv_dir, folder))
+            if f'{folder}.csv' in files:
+                vcell_csvs.append(f'{folder}.csv')
 
-# Get all Vcell csv paths in list
-for folder in os.listdir(vcell_results_csv_dir):
-    if folder not in ['.DS_Store', 'empty_results.txt']:
-        files = os.listdir(os.path.join(vcell_results_csv_dir, folder))
-        if f'{folder}.csv' in files:
-            vcell_csvs.append(f'{folder}.csv')
+    # Get all COPASI csv paths in list
+    for folder in os.listdir(copasi_results_csv_dir):
+        if folder not in ['.DS_Store', '.gitkeep']:
+            files = os.listdir(os.path.join(copasi_results_csv_dir, folder))
+            if f'{folder}.csv' in files:
+                copasi_csvs.append(f'{folder}.csv')
 
-# Get all COPASI csv paths in list
-for folder in os.listdir(copasi_results_csv_dir):
-    if folder not in ['.DS_Store', 'empty_results.txt']:
-        files = os.listdir(os.path.join(copasi_results_csv_dir, folder))
-        if f'{folder}.csv' in files:
-            copasi_csvs.append(f'{folder}.csv')
+    copasi_csvs = sorted(copasi_csvs)
+    vcell_csvs = sorted(vcell_csvs)
 
-copasi_csvs = sorted(copasi_csvs)
-vcell_csvs = sorted(vcell_csvs)
-
-vcell_na_csv = []
-copasi_na_csv = []
-
-comparisons_done = 0
-files_10e1 = []
-files_10e4 = []
-files_10e12 = []
-
-unmatching_specie_models = []
-
+    
 
 def gen_report():
+    global models
+    prepare_vcell_copasi_csv()
+    vcell_na_csv = []
+    copasi_na_csv = []
+
+    comparisons_done = 0
+    files_10e1 = []
+    files_10e4 = []
+    files_10e12 = []
+
+    unmatching_specie_models = []
     for model in models:
         to_continue = False
         species = get_species(model)
@@ -87,6 +92,7 @@ def gen_report():
 
         copasi_csv_path = copasi_path(f'{model_name}.csv')
         vcell_csv_path = vcell_path(f'{model_name}.csv')
+
 
         if copasi_csv_path == -1:
             print(copasi_csv_path)
@@ -124,14 +130,23 @@ def gen_report():
             files_10e1.append(model_name)
 
         if (diff > 10e4).any(True).sum() > 0:
-            files_10e1.append(model_name)
+            files_10e4.append(model_name)
 
         if (diff > 10e12).any(True).sum() > 0:
-            files_10e1.append(model_name)
+            files_10e12.append(model_name)
 
-        global comparisons_done
         comparisons_done = comparisons_done + 1
 
+    with open('report.txt', 'w+') as report:
 
-if __name__ == "__main__":
-    gen_report()
+        print('vcell_na_csv: ', len(vcell_na_csv), file=report)
+        print('copasi_na_csv: ', len(copasi_na_csv), file=report)
+        print('comparisons_done: ', (comparisons_done), file=report)
+        print('files_10e1: ', len(files_10e1), file=report)
+        print('files_10e4: ', len(files_10e4), file=report)
+        print('files_10e12: ', len(files_10e12), file=report)
+        print('unmatching_specie_models: ', len(
+            unmatching_specie_models), file=report)
+
+
+
