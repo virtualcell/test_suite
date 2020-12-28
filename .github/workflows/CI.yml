@@ -27,6 +27,7 @@ jobs:
       working-directory: ${{runner.workspace}}/test_suite
       run: |
         zip -r artifact_"`date +"%d_%m_%Y"`".zip report_generation/files/logs report_generation/files/results report.txt
+        ls
 
     - name: 'Upload artifacts'
       uses: actions/upload-artifact@v2
