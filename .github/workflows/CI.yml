@@ -29,10 +29,14 @@ jobs:
         zip -r artifact_"`date +"%d_%m_%Y"`".zip report_generation/files/logs report_generation/files/results report.txt
         ls
 
+    - name: Get artifact file name
+      id: date
+      run: echo ::set-output name=format::$(date +"%d_%m_%Y")
+
     - name: 'Upload artifacts'
       uses: actions/upload-artifact@v2
       with:
         name: comparison_report
-        path: artifact_"`date +"%d_%m_%Y"`".zip
+        path: artifact_${{steps.date.outputs.format}}.zip
         if-no-files-found: warn
 
