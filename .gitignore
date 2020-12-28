@@ -135,7 +135,7 @@ report_generation/files/omex_archives/copasi/*
 !report_generation/files/omex_archives/copasi/.gitkeep
 
 report_generation/files/omex_archives/vcell/*
-!report_generation/files/omex_archives/copasi/.gitkeep
+!report_generation/files/omex_archives/vcell/.gitkeep
 
 report_generation/files/logs/copasi/*
 !report_generation/files/logs/copasi/.gitkeep
