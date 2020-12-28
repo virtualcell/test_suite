@@ -1,11 +1,11 @@
 name: CI
 
 on:
-  push:
-    branches: 
-      - dev
-  # schedule: 
-  #   - cron: "0 2 * * 1"
+  # push:
+  #   branches: 
+  #     - dev
+  schedule: 
+    - cron: "0 20 * * 1"
 
 jobs:
   build:
@@ -33,7 +33,11 @@ jobs:
     - name: 'Archive results, logs, report'
       working-directory: ${{runner.workspace}}/test_suite
       run: |
-        zip -r artifact_"`date +"%m_%d_%Y"`" report_generation/files/logs report_generation/files/results report.txt
+        zip -r report_"`date +"%m_%d_%Y"`" \
+        report_generation/files/logs \
+        report_generation/files/results \
+        report_generation/files/bmdb_models \
+        report.txt
     
     - name: Create Release and Upload
       id: create_release
@@ -41,8 +45,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
       with:
-        tag_name: artifact_${{steps.date.outputs.format}}
-        release_name: artifact_${{steps.date.outputs.format}}
+        tag_name: report_${{steps.date.outputs.format}}
+        release_name: report_${{steps.date.outputs.format}}
         draft: false
         prerelease: false
         upload_url_type: application/zip
@@ -54,14 +58,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PAT }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./artifact_${{steps.date.outputs.format}}.zip
-        asset_name: artifact_${{steps.date.outputs.format}}.zip
+        asset_path: ./report_${{steps.date.outputs.format}}.zip
+        asset_name: report_${{steps.date.outputs.format}}.zip
         asset_content_type: application/zip
-
-    # - name: 'Upload artifacts'
-    #   uses: actions/upload-artifact@v2
-    #   with:
-    #     name: artifact_${{steps.date.outputs.format}}
-    #     path: artifact_${{steps.date.outputs.format}}.zip
-    #     if-no-files-found: warn
 
