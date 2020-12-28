@@ -32,8 +32,9 @@ class FilesList:
                 sedml_file = sedml_file.split('.')[0]
                 vcell_sedml_file_list.append(sedml_file)
             else:
-                print(
-                    f'{sedml_file} is not SED-ML file, check the directory {os.path.join(sedml_doc_path, "vcell")}\n')
+                # print(
+                #     f'{sedml_file} is not SED-ML file, check the directory {os.path.join(sedml_doc_path, "vcell")}\n')
+                continue
         return vcell_sedml_file_list
 
     def copasi_sedml_files_list(self):
@@ -43,6 +44,7 @@ class FilesList:
                 sedml_file = sedml_file.split('.')[0]
                 copasi_sedml_file_list.append(sedml_file)
             else:
-                print(
-                    f'{sedml_file}  is not SED-ML file, check the directory {os.path.join(sedml_doc_path, "copasi")}\n')
+                # print(
+                #     f'{sedml_file}  is not SED-ML file, check the directory {os.path.join(sedml_doc_path, "copasi")}\n')
+                continue
         return copasi_sedml_file_list

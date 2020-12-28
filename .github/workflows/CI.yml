@@ -26,17 +26,37 @@ jobs:
     - name: 'Archive results, logs, report'
       working-directory: ${{runner.workspace}}/test_suite
       run: |
-        zip -r artifact_"`date +"%d_%m_%Y"`".zip report_generation/files/logs report_generation/files/results report.txt
-        ls
+        zip -r artifact_"`date +"%d_%m_%Y"`" report_generation/files/logs report_generation/files/results report.txt
+    
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
 
     - name: Get artifact file name
       id: date
       run: echo ::set-output name=format::$(date +"%d_%m_%Y")
-
-    - name: 'Upload artifacts'
-      uses: actions/upload-artifact@v2
+    
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT }}
       with:
-        name: artifact_${{steps.date.outputs.format}}
-        path: artifact_${{steps.date.outputs.format}}.zip
-        if-no-files-found: warn
+        asset_path: ./artifact_${{steps.date.outputs.format}}.zip
+        asset_name: artifact_${{steps.date.outputs.format}}.zip
+        asset_content_type: application/zip
+
+    # - name: 'Upload artifacts'
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: artifact_${{steps.date.outputs.format}}
+    #     path: artifact_${{steps.date.outputs.format}}.zip
+    #     if-no-files-found: warn
 
