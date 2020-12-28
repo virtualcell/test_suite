@@ -26,13 +26,12 @@ jobs:
     - name: 'Archive results, logs, report'
       working-directory: ${{runner.workspace}}/test_suite
       run: |
-        now=$(date+"%m_%d_%Y")
-        zip -r artifact_$now.zip report_generation/files/logs report_generation/files/results report.txt
-      if-no-files-found: warn
-    
+        zip -r artifact_"`date +"%d_%m_%Y"`".zip report_generation/files/logs report_generation/files/results report.txt
+
     - name: 'Upload artifacts'
       uses: actions/upload-artifact@v2
       with:
         name: comparison_report
-        path: artifact_`date +'%m_%d_%Y'`.zip
+        path: artifact_"`date +"%d_%m_%Y"`".zip
+        if-no-files-found: warn
 
