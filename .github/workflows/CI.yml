@@ -3,8 +3,6 @@ name: CI
 on:
   push:
     branch: dev
-  release:
-    types: created
   # schedule: 
   #   - cron: "0 2 * * 1"
 
@@ -25,6 +23,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         PYTHONPATH=$(pwd) python report_generation/core.py
+    - name: Get artifact file name
+      id: date
+      run: echo ::set-output name=format::$(date +"%d_%m_%Y")
         
     # Archiving results, logs, report
     - name: 'Archive results, logs, report'
@@ -39,14 +40,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PAT }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        release_name: artifact_${{steps.date.outputs.format}}
         draft: false
         prerelease: false
 
-    - name: Get artifact file name
-      id: date
-      run: echo ::set-output name=format::$(date +"%d_%m_%Y")
-    
     - name: Upload Release Asset
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
