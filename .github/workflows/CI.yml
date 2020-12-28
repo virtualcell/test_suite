@@ -40,7 +40,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
       with:
-        tag_name: ${{ github.ref }}
+        tag_name: artifact_${{steps.date.outputs.format}}
         release_name: artifact_${{steps.date.outputs.format}}
         draft: false
         prerelease: false
