@@ -1,7 +1,10 @@
 name: CI
 
 on:
-  - push
+  push:
+    branch: dev
+  release:
+    types: created
   # schedule: 
   #   - cron: "0 2 * * 1"
 
@@ -50,6 +53,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
       with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ./artifact_${{steps.date.outputs.format}}.zip
         asset_name: artifact_${{steps.date.outputs.format}}.zip
         asset_content_type: application/zip
