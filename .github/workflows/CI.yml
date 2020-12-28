@@ -15,16 +15,13 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8
-    - name: Install dependencies
+    - name: Install dependencies and run simulations
       working-directory: ${{runner.workspace}}/test_suite
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Download SBML models, generate SED-ML, generate OMEX archive, run the simulation, genrate the comparison report
-      working-directory: ${{runner.workspace}}/test_suite
-      run: |
         PYTHONPATH=$(pwd) python report_generation/core.py
-
+        
     # Archiving results, logs, report
     - name: 'Archive results, logs, report'
       working-directory: ${{runner.workspace}}/test_suite

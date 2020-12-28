@@ -146,7 +146,7 @@ def gen_report():
         print('Files with difference of 10e1: ', len(files_10e1), file=report)
         print('Files with difference of 10e4: ', len(files_10e4), file=report)
         print('Files with difference of 10e12: ', len(files_10e12), file=report)
-        print('Comparisons not done due to unavailablilty of matching species in results: ', len(
+        print('Comparisons not done due to unavailability of matching species in results: ', len(
             unmatching_specie_models), file=report)
 
 
