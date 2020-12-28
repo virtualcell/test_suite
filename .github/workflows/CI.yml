@@ -1,8 +1,8 @@
 name: CI
 
-on: [push]
-  # schedule: 
-  #   - cron: "30 23 * * 0"
+on:
+  schedule: 
+    - cron: "0 1 * * 0"
 
 jobs:
   build:
@@ -36,7 +36,7 @@ jobs:
     - name: 'Upload artifacts'
       uses: actions/upload-artifact@v2
       with:
-        name: comparison_report
+        name: artifact_${{steps.date.outputs.format}}
         path: artifact_${{steps.date.outputs.format}}.zip
         if-no-files-found: warn
 
