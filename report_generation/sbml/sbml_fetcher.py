@@ -37,8 +37,9 @@ def soup_scraper(model, headers):
     preview_url = preview_button_context[0]['data-download-link']
     return preview_url
 
-def download_sbml(): 
-    for model in create_model_list(10, 0, -1):
+def download_sbml():
+    #TODO: Consider a better scenario to determine the latest published model instead harcoding 1000
+    for model in create_model_list(1000, 0, -1):
         try: 
             sbml_file_link = Config.BASE_URL + soup_scraper(model, headers=headers)
             urllib.request.urlretrieve(sbml_file_link, os.path.join(
