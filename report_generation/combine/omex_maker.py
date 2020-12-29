@@ -1,6 +1,7 @@
 from libcombine import *
 from report_generation.combine.files_list import FilesList
 from report_generation.config import Config
+from logzero import logger
 
 omex_path = Config.OMEX_FILE_PATH
 sedml_doc_path = Config.SEDML_DOC_PATH
@@ -57,8 +58,8 @@ def create_omex_archive(sbml_name, sedml_name, simulator):
     out_file = os.path.abspath(os.path.join(
         omex_path, simulator, f"{sbml_name.split('.')[0]}.omex"))
     archive.writeToFile(out_file)
-
-    print('Archive created:', out_file.split('/')[-1])
+    out_file_name = out_file.split('/')[-1]
+    logger.info(f'Archive created: {out_file_name}')
 
 class GenOmex:
     def omex_gen_vcell(self):

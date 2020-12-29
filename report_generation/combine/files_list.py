@@ -1,5 +1,6 @@
 import os
 from report_generation.config import Config
+from logzero import logger
 
 omex_path = Config.OMEX_FILE_PATH
 sedml_doc_path = Config.SEDML_DOC_PATH
@@ -19,9 +20,9 @@ class FilesList:
                 sbml_file = sbml_file.split('.')[0]
                 sbml_file_list.append(sbml_file)
             elif sbml_file.split('.')[1] != 'xml':
-                print(f"{sbml_file} is not a model file\n")
+                logger.warning(f"{sbml_file} is not a model file\n")
             else:
-                print(
+                logger.error(
                     f"No model files found in the directory {os.path.join(os.path.join(model_files_path))}\n")
         return sbml_file_list
 

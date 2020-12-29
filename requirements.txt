@@ -8,3 +8,4 @@ docker
 pkg_utils
 pandas
 docker
+logzero

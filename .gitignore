@@ -150,3 +150,5 @@ report_generation/files/results/copasi/*
 !report_generation/files/results/copasi/.gitkeep
 
 report.txt
+
+script.sh

@@ -9,6 +9,7 @@ import os
 from report_generation.config import Config
 import libsbml
 import libsedml
+from logzero import logger
 
 
 model_files_path = Config.MODEL_FILES_PATH
@@ -55,7 +56,8 @@ def create_sedml(filename, simulator,
     elif simulator == 'vcell':
         alg.setKisaoID(f'KISAO:0000019')
     else:
-        print(f"{simulator} is still not supported to generate the SED-ML")
+        logger.warning(
+            f"{simulator} is still not supported to generate the SED-ML")
 
     # create a task that uses the simulation and the model above
     task = doc.createTask()
@@ -118,7 +120,8 @@ def create_sedml(filename, simulator,
 
     # write the document
     libsedml.writeSedML(doc, os.path.join(sedml_doc_path, simulator, f'{filename}.sedml'))
-    print(f"SED-ML Document created for {simulator} with filename {filename}.sedml")
+    logger.info(
+        f"SED-ML Document created for {simulator} with filename {filename}.sedml")
 
 def gen_sedml():
     global model_files
@@ -130,7 +133,8 @@ def gen_sedml():
             create_sedml(model_name, 'vcell')
             create_sedml(model_name, 'copasi')
         elif sbml_model.split('.')[1] != 'xml':
-            print(f"{sbml_model} is not a model file\n")
+            logger.warning(f"{sbml_model} is not a model file\n")
         else:
-            print(f"No SBML files found in the directory {os.path.join(model_files_path)}\n")
+            logger.error(
+                f"No SBML files found in the directory {os.path.join(model_files_path)}\n")
 

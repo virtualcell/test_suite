@@ -3,6 +3,7 @@ from report_generation.config import Config
 import urllib
 from bs4 import BeautifulSoup
 import requests
+from logzero import logger
 
 model_files_path = Config.MODEL_FILES_PATH
 
@@ -37,13 +38,13 @@ def soup_scraper(model, headers):
     return preview_url
 
 def download_sbml(): 
-    for model in create_model_list(1000, 0, -1):
+    for model in create_model_list(10, 0, -1):
         try: 
             sbml_file_link = Config.BASE_URL + soup_scraper(model, headers=headers)
             urllib.request.urlretrieve(sbml_file_link, os.path.join(
                     model_files_path, f'{model}.xml'))
-            print(f'Downloaded {model}.xml')
+            logger.info(f'Downloaded {model}.xml')
         except IndexError as IE:
-            print(f"{model}.xml is not published yet.")
+            logger.info(f"{model}.xml is not published yet.")
             continue
 

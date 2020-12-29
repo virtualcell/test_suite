@@ -1,5 +1,5 @@
 #!/bin/bash
-pwd
+
 cd report_generation
 cd files
 cd omex_archives
