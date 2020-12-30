@@ -7,6 +7,7 @@
 
 import os
 from report_generation.config import Config
+from report_generation.combine.files_list import get_file_list
 import libsbml
 import libsedml
 from logzero import logger
@@ -17,7 +18,7 @@ def create_sedml(filename, simulator,
                  initial_time=0.0, report_output_start=0.0, 
                  report_output_end=10, no_of_time_points=101, 
                  model_files_path=Config.MODEL_FILES_PATH,
-                 sedml_doc_path=Config.SEDML_DOC_PATH):
+                 sedml_doc_path=Config.SEDML_DOC_PATH) -> None:
 
     # create the document
     doc = libsedml.SedDocument()
@@ -120,16 +121,8 @@ def create_sedml(filename, simulator,
         f"SED-ML Document created for {simulator} with filename {filename}.sedml")
 
 
-def gen_sedml(model_file_path=Config.MODEL_FILES_PATH):
-    model_files = os.listdir(os.path.join(model_file_path))
+def gen_sedml(model_file_path=Config.MODEL_FILES_PATH) -> None:
+    model_files = get_file_list(model_file_path, 'xml')
     for sbml_model in model_files:
-        if sbml_model.split('.')[1] == 'xml':
-            model_name = sbml_model.split('.xml')[0]
-            create_sedml(model_name, 'vcell')
-            create_sedml(model_name, 'copasi')
-        elif sbml_model.split('.')[1] != 'xml':
-            logger.warning(f"{sbml_model} is not a model file\n")
-        else:
-            logger.error(
-                f"No SBML files found in the directory {model_file_path}\n")
-
+        create_sedml(sbml_model, 'vcell')
+        create_sedml(sbml_model, 'copasi')

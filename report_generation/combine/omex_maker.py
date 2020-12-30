@@ -30,8 +30,6 @@ class GenOmex:
             self.simulator_sedml_list_map[simulator] = get_file_list(os.path.join(sedml_path, simulator), 'sedml')
         
 
-        
-    
     def create_omex_archive(self, sbml_name,
                             sedml_name,
                             simulator='vcell',
@@ -92,5 +90,3 @@ class GenOmex:
         for simulator, files in self.simulator_sedml_list_map.items():
             for sbml, sedml in zip(self.sbml_files_list, files):
                 self.create_omex_archive(sbml, sedml, simulator=simulator)
-
-
