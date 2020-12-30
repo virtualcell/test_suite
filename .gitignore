@@ -152,3 +152,6 @@ report_generation/files/results/copasi/*
 report.txt
 
 script.sh
+
+tests/*
+docs/*

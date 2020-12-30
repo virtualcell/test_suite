@@ -6,7 +6,7 @@ import subprocess
 from logzero import logger
 
 logger.debug("Download starting...")
-download_sbml()
+download_sbml(1000, 0, -1)
 logger.debug("Download finished...\n\n")
 
 logger.debug("Starting to generate SED-ML documents...")
@@ -15,8 +15,7 @@ logger.debug("SED-ML generation finished...\n\n")
 
 logger.debug("Creating OMEX archives...")
 omex = GenOmex()
-omex.omex_gen_copasi()
-omex.omex_gen_vcell()
+omex.gen_omex()
 logger.debug("Archive generation finished...\n\n")
 
 
