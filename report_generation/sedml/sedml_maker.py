@@ -12,17 +12,19 @@ import libsedml
 from logzero import logger
 
 
-model_files_path = Config.MODEL_FILES_PATH
 
-sedml_doc_path = Config.SEDML_DOC_PATH
 
-model_files = []
+
+
+
 
 
 # NOTE: filename has to be without extension
 def create_sedml(filename, simulator, 
-    initial_time=0.0, report_output_start=0.0, 
-    report_output_end=10, no_of_time_points=101):
+                 initial_time=0.0, report_output_start=0.0, 
+                 report_output_end=10, no_of_time_points=101, 
+                 model_files_path=Config.MODEL_FILES_PATH,
+                 sedml_doc_path=Config.SEDML_DOC_PATH):
 
     # create the document
     doc = libsedml.SedDocument()
@@ -57,7 +59,8 @@ def create_sedml(filename, simulator,
         alg.setKisaoID(f'KISAO:0000019')
     else:
         logger.warning(
-            f"{simulator} is still not supported to generate the SED-ML")
+            f"{simulator} is not supported to generate the SED-ML, falling back to VCell(CVODE KISAO:0000019)")
+        alg.setKisaoID(f'KISAO:0000019')
 
     # create a task that uses the simulation and the model above
     task = doc.createTask()
@@ -123,10 +126,10 @@ def create_sedml(filename, simulator,
     logger.info(
         f"SED-ML Document created for {simulator} with filename {filename}.sedml")
 
-def gen_sedml():
-    global model_files
+
+def gen_sedml(model_file_path=Config.MODEL_FILES_PATH):
     model_files = os.listdir(os.path.abspath(
-        os.path.join(model_files_path)))
+        os.path.join(model_file_path)))
     for sbml_model in model_files:
         if sbml_model.split('.')[1] == 'xml':
             model_name = sbml_model.split('.xml')[0]
@@ -136,5 +139,5 @@ def gen_sedml():
             logger.warning(f"{sbml_model} is not a model file\n")
         else:
             logger.error(
-                f"No SBML files found in the directory {os.path.join(model_files_path)}\n")
+                f"No SBML files found in the directory {os.path.join(Config.MODEL_FILES_PATH)}\n")
 

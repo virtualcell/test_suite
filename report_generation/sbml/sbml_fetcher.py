@@ -38,7 +38,7 @@ def download_sbml(start, end, step, base_url=Config.BASE_URL, headers=Config.HEA
     for model in create_model_list(start, end, step):
         try: 
             sbml_file_link = base_url + \
-                soup_scraper(model, headers=headers)
+                soup_scraper(model, headers, base_url)
             urllib.request.urlretrieve(sbml_file_link, os.path.join(
                     model_files_path, f'{model}.xml'))
             logger.info(f'Downloaded {model}.xml')
