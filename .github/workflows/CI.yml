@@ -33,7 +33,7 @@ jobs:
     - name: 'Archive results, logs, report'
       working-directory: ${{runner.workspace}}/test_suite
       run: |
-        zip -r report_"`date +"%m_%d_%Y"`" \
+        zip -r report_${{steps.date.outputs.format}} \
           report_generation/files/logs \
           report_generation/files/results \
           report_generation/files/bmdb_models \
