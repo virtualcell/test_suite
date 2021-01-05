@@ -153,5 +153,6 @@ report.txt
 
 script.sh
 
-tests/*
 docs/*
+
+report_generation/run_script/*.py
