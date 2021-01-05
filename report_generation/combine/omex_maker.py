@@ -1,4 +1,11 @@
-from report_generation.sbml import sbml_fetcher
+""" OMEX archive generator
+
+:Author: Akhil Marupilla <marupilla@mail.com>
+:Date: 2020-11-23
+:Copyright: 2020, UConn Health
+:License: MIT
+"""
+
 from libcombine import *
 from report_generation.combine.files_list import get_file_list
 from report_generation.config import Config
@@ -6,14 +13,21 @@ from logzero import logger
 
 
 class GenOmex:
+    """Create and generate OMEX archives
+    """
     def __init__(self, 
                 model_path=Config.MODEL_FILES_PATH, 
                 sedml_path=Config.SEDML_DOC_PATH, 
                 omex_path=Config.OMEX_FILE_PATH,
-                simulators = ['vcell','copasi']) -> None:
+                simulators = ['vcell','copasi']) -> None:        
+        """
+        Args:
+            model_path (`str`, optional): SBML model directory path. Defaults to Config.MODEL_FILES_PATH.
+            sedml_path (`str`, optional): SED-ML doc directory path. Defaults to Config.SEDML_DOC_PATH.
+            omex_path (`str`, optional): OMEX directory path. Defaults to Config.OMEX_FILE_PATH.
+            simulators (list, optional): list of supported simulators. Defaults to ['vcell','copasi'].
+        """
         self.sbml_files_list = get_file_list(model_path)
-
-
         self.model_path = model_path
         self.sedml_path = sedml_path
         self.omex_path = omex_path
@@ -33,11 +47,17 @@ class GenOmex:
     def create_omex_archive(self, sbml_name,
                             sedml_name,
                             simulator='vcell',
-                            ) -> None:
-    
+                            ) -> bool:
+        """Creates OMEX archive using libCombine library
+
+        Args:
+            sbml_name (`str`): SBML model name without file extension
+            sedml_name (`str`): SED-ML doc name without file extension
+            simulator (str, optional): VCell or COPASI . Defaults to 'vcell'.
+        """
         archive = CombineArchive()
 
-        archive.addFile(
+        is_model = archive.addFile(
             os.path.join(self.model_path,
                         f"{sbml_name}.xml"),  # target file name
             sbml_name + '.xml',  # filename
@@ -45,7 +65,7 @@ class GenOmex:
             KnownFormats.lookupFormat("sbml"),
             True  # mark file as master
         )
-        archive.addFile(
+        is_sedml = archive.addFile(
             os.path.join(self.sedml_path, simulator,
                         f"{sedml_name}.sedml"),  # target file name
             sedml_name + '.sedml',  # filename
@@ -81,12 +101,15 @@ class GenOmex:
         # write the archive
         out_file = os.path.join(
             self.omex_path, simulator, f"{sbml_name.split('.')[0]}.omex")
-        archive.writeToFile(out_file)
+        is_archive_written = archive.writeToFile(out_file)
         out_file_name = out_file.split('/')[-1]
         logger.info(f'Archive created: {out_file_name}')
+        return is_model and is_sedml and is_archive_written
 
 
-    def gen_omex(self):
+    def gen_omex(self) -> None:
+        """ It generates OMEX archives to respective directory
+        """
         for simulator, files in self.simulator_sedml_list_map.items():
             for sbml, sedml in zip(self.sbml_files_list, files):
                 self.create_omex_archive(sbml, sedml, simulator=simulator)

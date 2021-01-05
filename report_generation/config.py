@@ -1,7 +1,10 @@
 import os
 
+__all__ = ['Config']
 
 class Config:
+    """Config file
+    """
     BASE_URL = 'https://www.ebi.ac.uk'
     BASE_DIR = os.path.dirname(__file__)
     BASE_FILES_PATH = os.path.join(BASE_DIR, 'files')

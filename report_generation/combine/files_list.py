@@ -1,13 +1,25 @@
+""" Files list from a directory
+
+:Author: Akhil Marupilla <marupilla@mail.com>
+:Date: 2020-11-23
+:Copyright: 2020, UConn Health
+:License: MIT
+"""
+
 import os
-from report_generation.config import Config
 from logzero import logger
 
-"""Gets file list for specified file type
-parameters:
-path: path to search
-file_type: file type to search 
-"""
+
 def get_file_list(path, file_type = 'xml') -> list():
+    """This is a function which lists all the files in the specific directory
+
+    Args:
+        path (`str`): path of the directory
+        file_type (`str`, optional): file extension type. Defaults to XML.
+
+    Returns:
+        list: returns the list of files
+    """
     files = os.listdir(os.path.join(path))
     if '.gitkeep' in files:
         files.remove('.gitkeep')
