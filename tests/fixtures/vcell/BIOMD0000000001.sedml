@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/" level="1" version="1">
+  <listOfModels>
+    <model id="BIOMD0000000001" language="urn:sedml:language:sbml" source="BIOMD0000000001.xml"/>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="BIOMD0000000001" initialTime="0" outputStartTime="0" outputEndTime="10" numberOfPoints="101">
+      <algorithm kisaoID="KISAO:0000019"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="BIOMD0000000001" name="BIOMD0000000001" modelReference="BIOMD0000000001" simulationReference="BIOMD0000000001"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="time" name="time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="time" name="time" symbol="urn:sedml:symbol:time" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="BLL" name="BLL">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> BLL </ci>
+      </math>
+      <listOfVariables>
+        <variable id="BLL" name="BLL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;BLL&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="IL" name="IL">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> IL </ci>
+      </math>
+      <listOfVariables>
+        <variable id="IL" name="IL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;IL&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="AL" name="AL">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> AL </ci>
+      </math>
+      <listOfVariables>
+        <variable id="AL" name="AL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;AL&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="A" name="A">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> A </ci>
+      </math>
+      <listOfVariables>
+        <variable id="A" name="A" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;A&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="BL" name="BL">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> BL </ci>
+      </math>
+      <listOfVariables>
+        <variable id="BL" name="BL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;BL&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="B" name="B">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> B </ci>
+      </math>
+      <listOfVariables>
+        <variable id="B" name="B" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;B&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="DLL" name="DLL">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> DLL </ci>
+      </math>
+      <listOfVariables>
+        <variable id="DLL" name="DLL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;DLL&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="D" name="D">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> D </ci>
+      </math>
+      <listOfVariables>
+        <variable id="D" name="D" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;D&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="ILL" name="ILL">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> ILL </ci>
+      </math>
+      <listOfVariables>
+        <variable id="ILL" name="ILL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;ILL&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="DL" name="DL">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> DL </ci>
+      </math>
+      <listOfVariables>
+        <variable id="DL" name="DL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;DL&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="I" name="I">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> I </ci>
+      </math>
+      <listOfVariables>
+        <variable id="I" name="I" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;I&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="ALL" name="ALL">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> ALL </ci>
+      </math>
+      <listOfVariables>
+        <variable id="ALL" name="ALL" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;ALL&apos;]" taskReference="BIOMD0000000001"/>
+      </listOfVariables>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs xmlns="http://sed-ml.org/">
+    <report id="BIOMD0000000001" name="BIOMD0000000001">
+      <listOfDataSets>
+        <dataSet id="time" label="time" dataReference="time"/>
+        <dataSet id="BLL" label="BLL" dataReference="BLL"/>
+        <dataSet id="IL" label="IL" dataReference="IL"/>
+        <dataSet id="AL" label="AL" dataReference="AL"/>
+        <dataSet id="A" label="A" dataReference="A"/>
+        <dataSet id="BL" label="BL" dataReference="BL"/>
+        <dataSet id="B" label="B" dataReference="B"/>
+        <dataSet id="DLL" label="DLL" dataReference="DLL"/>
+        <dataSet id="D" label="D" dataReference="D"/>
+        <dataSet id="ILL" label="ILL" dataReference="ILL"/>
+        <dataSet id="DL" label="DL" dataReference="DL"/>
+        <dataSet id="I" label="I" dataReference="I"/>
+        <dataSet id="ALL" label="ALL" dataReference="ALL"/>
+      </listOfDataSets>
+    </report>
+  </listOfOutputs>
+</sedML>

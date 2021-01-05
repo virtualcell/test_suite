@@ -25,4 +25,4 @@ class SedmlMaker(unittest.TestCase):
         generate_sedml = sedml_maker.gen_sedml('vcell', initial_time=0.0, report_output_start=0.0,
                                                report_output_end=10, no_of_time_points=101,
                                                model_file_path='tests/fixtures', sedml_doc_path='tests/fixtures')
-        self.assertEqual(generate_sedml, ([1], [1]))
+        self.assertEqual(generate_sedml, ([1, 1], [1, 1]))

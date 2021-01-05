@@ -5,7 +5,7 @@ from report_generation.combine.files_list import get_file_list
 class FileListTestCase(unittest.TestCase):
     def test_get_model_list(self):
         sbml_list = get_file_list(path='tests/fixtures', file_type='xml')
-        self.assertEqual(sbml_list, ['model_1'])
+        self.assertEqual(sbml_list, ['BIOMD0000000001', 'model_1'])
     
     def test_get_model(self):
         sbml_name = get_file_list(path='tests/fixtures', file_type='xml')

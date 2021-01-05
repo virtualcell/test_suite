@@ -9,15 +9,10 @@ class OmexMakerTestCase(unittest.TestCase):
         simulators=['vcell', 'copasi']
     )
     def test_GenOmex(self):
-        gen_archive = omex_maker.GenOmex(
-            model_path='tests/fixtures',
-            sedml_path='tests/fixtures',
-            omex_path='tests/fixtures',
-            simulators=['vcell', 'copasi'])
-        self.assertEqual(gen_archive.model_path, 'tests/fixtures')
-        self.assertEqual(gen_archive.sedml_path, 'tests/fixtures')
-        self.assertEqual(gen_archive.omex_path, 'tests/fixtures')
-        self.assertEqual(gen_archive.simulators, ['vcell', 'copasi'])
+        self.assertEqual(self.gen_archive.model_path, 'tests/fixtures')
+        self.assertEqual(self.gen_archive.sedml_path, 'tests/fixtures')
+        self.assertEqual(self.gen_archive.omex_path, 'tests/fixtures')
+        self.assertEqual(self.gen_archive.simulators, ['vcell', 'copasi'])
 
     def test_create_omex_archive(self):
         
