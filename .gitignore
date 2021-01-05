@@ -156,3 +156,6 @@ script.sh
 docs/*
 
 report_generation/run_script/*.py
+
+tests/fixtures/copasi/*.omex
+tests/fixtures/vcell/*.omex
