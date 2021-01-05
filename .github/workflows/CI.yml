@@ -21,7 +21,7 @@ jobs:
           python-version: 3.8
 
       - name: Install dependencies and run simulations
-        if: {{ github.event == 'schedule' }}
+        if: {{ github.event_name == 'schedule' }}
         working-directory: ${{runner.workspace}}/test_suite
         run: |
           python -m pip install --upgrade pip
@@ -34,7 +34,7 @@ jobs:
           
       # Archiving results, logs, report
       - name: 'Archive results, logs, report'
-        if: {{ github.event == 'schedule' }} 
+        if: {{ github.event_name == 'schedule' }} 
         working-directory: ${{runner.workspace}}/test_suite
         run: |
           zip -r report_${{steps.date.outputs.format}} \
@@ -44,7 +44,7 @@ jobs:
             report.txt
       
       - name: Create Release and Upload
-        if: {{ github.event == 'schedule' }}
+        if: {{ github.event_name == 'schedule' }}
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -57,7 +57,7 @@ jobs:
           upload_url_type: application/zip
 
       - name: Upload Release Asset
-        if: {{ github.event == 'schedule' }}
+        if: {{ github.event_name == 'schedule' }}
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
         env:
@@ -69,7 +69,7 @@ jobs:
           asset_content_type: application/zip
 
       - name: Run Pytests
-        if: {{ github.event == 'push' }}
+        if: {{ github.event_name == 'push' }}
         working-directory: ${{runner.workspace}}/test_suite
         run: |
           python -m pip install --upgrade pip
