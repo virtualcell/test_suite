@@ -25,6 +25,8 @@ try:
 
     # TODO: Replace with run_docker.py
     logger.debug("Running COPASI simulations...")
+
+    # TODO: Make copasi and vcell simultion run in different processes
     copasi_run = subprocess.run(
         ["./report_generation/run_script/run_copasi_sim.sh"])
     logger.info("The exit code was: %d" % copasi_run.returncode)

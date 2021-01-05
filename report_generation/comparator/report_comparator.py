@@ -53,6 +53,8 @@ class ReportComparator:
         copasi_csvs = self.prepare_vcell_csv()
         vcell_csvs = self.prepare_copasi_csv()
 
+        return copasi_csvs, vcell_csvs
+
     def prepare_vcell_csv(self):
         vcell_csvs = []
         # Get all Vcell csv paths in list
@@ -78,7 +80,7 @@ class ReportComparator:
 
         return sorted(copasi_csvs)
 
-    def generate_report(self):
+    def generate_report(self, report_path: str = None):
         models = self.models
         self.prepare_csv()
         vcell_na_csv = []
@@ -139,7 +141,12 @@ class ReportComparator:
 
             comparisons_done = comparisons_done + 1
 
-        with open('report.txt', 'w+') as report:
+        if report_path is not None:
+            report_uri = os.path.join(report_path, 'report.txt')
+        else:
+            report_uri = 'report.txt'
+
+        with open(report_uri, 'w+') as report:
 
             print('CSVs (result) not available in VCell: ',
                   len(vcell_na_csv), file=report)
