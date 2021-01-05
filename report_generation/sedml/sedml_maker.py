@@ -18,9 +18,11 @@ __all__ = [
 ]
 
 # NOTE: sbml_name has to be without extension
-def create_sedml(sbml_name, simulator, 
-                 initial_time=0.0, report_output_start=0.0, 
-                 report_output_end=10, no_of_time_points=101, 
+
+
+def create_sedml(sbml_name, simulator,
+                 initial_time=0.0, report_output_start=0.0,
+                 report_output_end=10, no_of_time_points=101,
                  model_files_path=Config.MODEL_FILES_PATH,
                  sedml_doc_path=Config.SEDML_DOC_PATH) -> int:
     """This is a function which creates SED-ML file
@@ -130,18 +132,18 @@ def create_sedml(sbml_name, simulator,
         set.setDataReference(f'{specie}')
 
     # write the document
-    is_sedml_created = libsedml.writeSedML(doc, os.path.join(sedml_doc_path, simulator, f'{sbml_name}.sedml'))
+    is_sedml_created = libsedml.writeSedML(doc, os.path.join(
+        sedml_doc_path, simulator, f'{sbml_name}.sedml'))
     logger.info(
         f"SED-ML Document created for {simulator} with filename {sbml_name}.sedml")
-    print("is_sedml_created: ", is_sedml_created)
     return is_sedml_created
 
 
-def gen_sedml(simulator='vcell', initial_time=0.0, 
+def gen_sedml(simulator='vcell', initial_time=0.0,
               report_output_start=0.0,
-              report_output_end=10, no_of_time_points=101, 
-              model_file_path=Config.MODEL_FILES_PATH, 
-              sedml_doc_path= Config.SEDML_DOC_PATH) -> tuple:
+              report_output_end=10, no_of_time_points=101,
+              model_file_path=Config.MODEL_FILES_PATH,
+              sedml_doc_path=Config.SEDML_DOC_PATH) -> tuple:
     """This is a function that generates SED-ML
 
     Args:
@@ -151,10 +153,9 @@ def gen_sedml(simulator='vcell', initial_time=0.0,
     copasi = []
     for sbml_model in get_file_list(model_file_path, 'xml'):
         vcell.append(create_sedml(
-            sbml_model, 'vcell', initial_time=0.0, report_output_start=0.0,
-            report_output_end=10, no_of_time_points=101, model_files_path=Config.MODEL_FILES_PATH, sedml_doc_path=Config.SEDML_DOC_PATH))
+            sbml_model, 'vcell', initial_time, report_output_start,
+            report_output_end, no_of_time_points, model_file_path, sedml_doc_path))
         copasi.append(create_sedml(
-            sbml_model, 'copasi', initial_time=0.0, report_output_start=0.0,
-            report_output_end=10, no_of_time_points=101, model_files_path=Config.MODEL_FILES_PATH, sedml_doc_path=Config.SEDML_DOC_PATH))
-    print('vcell, copasi: -->', vcell, copasi)
+            sbml_model, 'copasi', initial_time, report_output_start,
+            report_output_end, no_of_time_points, model_file_path, sedml_doc_path))
     return (vcell, copasi)
