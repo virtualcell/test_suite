@@ -11,7 +11,7 @@ on:
 
 jobs:
   ci_report:
-    name: Upload Artifacts
+    name: CD
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'schedule' }}
     steps:
@@ -67,7 +67,7 @@ jobs:
           asset_content_type: application/zip
 
   ci:
-    name: Run tests
+    name: CI
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}
     steps:
