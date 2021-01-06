@@ -7,7 +7,7 @@
 """
 
 from libcombine import *
-from report_generation.combine.files_list import get_file_list
+from report_generation.utils.files_list import get_file_list
 from report_generation.config import Config
 from logzero import logger
 

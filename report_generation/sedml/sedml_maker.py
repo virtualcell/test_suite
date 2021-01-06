@@ -7,7 +7,7 @@
 
 import os
 from report_generation.config import Config
-from report_generation.combine.files_list import get_file_list
+from report_generation.utils.files_list import get_file_list
 import libsbml
 import libsedml
 from logzero import logger

@@ -1,5 +1,5 @@
 import unittest
-from report_generation.combine.files_list import get_file_list
+from report_generation.utils.files_list import get_file_list
 
 
 class FileListTestCase(unittest.TestCase):
