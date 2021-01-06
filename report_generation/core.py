@@ -1,12 +1,37 @@
 import subprocess
 from multiprocessing import Process
 from logzero import logger
+import fire
 from report_generation.combine.omex_maker import GenOmex
 from report_generation.sbml import download_sbml
 from report_generation.sedml.sedml_maker import gen_sedml
 from report_generation.comparator.report_comparator import ReportComparator
 
-""" Runs all the methods 
+""" Runs all the methods
+
+    Usage:
+        NAME
+        core.py - Downloads SBML files
+        SYNOPSIS
+            core.py START END STEP <flags>
+        DESCRIPTION
+            Downloads SBML files
+        POSITIONAL ARGUMENTS
+            START
+                Start point
+            END
+                End point
+            STEP
+                Step to run the loop
+        FLAGS
+            --base_url=BASE_URL
+                base URL https://www.ebi.ac.uk. Defaults to Config.BASE_URL.
+            --headers=HEADERS
+                request headers for `https://www.ebi.ac.uk`. Defaults to Config.HEADERS.
+            --model_files_path=MODEL_FILES_PATH
+                path for SBML model files to download. Defaults to Config.MODEL_FILES_PATH.
+        NOTES
+            You can also use flags syntax for POSITIONAL ARGUMENTS
 """
 
 def run_sim(sh_path:str) -> int:
@@ -25,7 +50,7 @@ if __name__ == '__main__':
     try:
         logger.debug("Download starting...")
         # TODO: Make this configuration acceptable from command line interface
-        download_sbml(10, 0, -1)
+        fire.Fire(download_sbml)
         logger.debug("Download finished...\n\n")
 
         logger.debug("Starting to generate SED-ML documents...")

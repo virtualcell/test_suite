@@ -1,3 +1,4 @@
+fire
 python_libsbml
 python_libsedml
 python_libcombine

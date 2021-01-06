@@ -12,11 +12,6 @@ from bs4 import BeautifulSoup
 import requests
 from logzero import logger
 
-__all__ = [
-    'create_model_list',
-    'soup_scraper',
-    'download_sbml'
-]
 
 #TODO: Consider a better scenario to determine the latest published model instead harcoding 1000
 #TODO: Consider a better scenario to determine the models to exclude instead harcoding 649, 694, 701
