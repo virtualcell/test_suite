@@ -70,13 +70,14 @@ if __name__ == '__main__':
         processes = []
         for command in command_list:
             run = Process(target=run_sim, args=[command])
-            if command.split('/')[3].split('_')[1] == 'copasi':
+            simulator = command.split('/')[3].split('_')[1]
+            if simulator == 'copasi':
                 logger.debug(
-                    f"Running {command.split('/')[3].split('_')[1]} simulations...")
+                    f"Running {simulator} simulations...")
 
-            if command.split('/')[3].split('_')[1] == 'vcell':
+            if simulator == 'vcell':
                 logger.debug(
-                    f"Running {command.split('/')[3].split('_')[1]} simulations...")
+                    f"Running {simulator} simulations...")
             run.start()
             processes.append(run)
         
