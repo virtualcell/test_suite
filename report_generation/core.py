@@ -49,7 +49,6 @@ def run_sim(sh_path:str) -> int:
 if __name__ == '__main__':
     try:
         logger.debug("Download starting...")
-        # TODO: Make this configuration acceptable from command line interface
         fire.Fire(download_sbml)
         logger.debug("Download finished...\n\n")
 
