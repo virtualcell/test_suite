@@ -27,6 +27,18 @@ class SbmlFetcher:
                  exclude_models: list=[649, 694, 701],
                  css_class='font-size: small; margin: -25px 0;'
                 ):
+        """
+        Args:
+            start (int, optional): Model number to start download from. Defaults to None.
+            end (int, optional): Model number to end download at. Defaults to 0.
+            step (int, optional): Step to run a loop. Defaults to -1.
+            base_url (str, optional): Web URL of BMDB. Defaults to Config.BASE_URL.
+            search_model_url (str, optional): Web URL with query search of latest model(BIOMODEL Z to A). Defaults to Config.SEARCH_MODEL_URL.
+            headers (dict, optional): headers of BMDB. Defaults to Config.HEADERS.
+            model_files_path (str, optional): path to download SBML model files. Defaults to Config.MODEL_FILES_PATH.
+            exclude_models (list, optional): list of models removed from BMDB. Defaults to [649, 694, 701].
+            css_class (str, optional): css class of tag `a` of `search_model_url` . Defaults to 'font-size: small; margin: -25px 0;'.
+        """
         self.base_url = base_url
         self.search_model_url = search_model_url
         self.headers = headers
@@ -39,18 +51,30 @@ class SbmlFetcher:
         self.latest_pub_model = None
 
     def get_latest_pub_model(self):
+        """Fetches latest published model
+
+        Returns:
+            int: returns integer of last published model else -1
+        """
         get_content = requests.get(self.search_model_url, headers=self.headers).text
         soup = BeautifulSoup(get_content, 'lxml')
         model_finder = soup.find_all('span', style=self.css_class)
         _id = model_finder[0].text
         try:
+            # TODO: Change slicing if models got published more than 1000, below slicing will not slice correctly
             latest_pub_model = _id.split('|')[0].replace(' ', '').split(':')[1][-4:]
             return int(latest_pub_model)
         except IndexError:
             logger.info("Check the Config for URL")
+            return -1
         
 
     def create_model_list(self):
+        """creates models list
+
+        Returns:
+            list: returns the list of model number in the BMDB naming format
+        """
         models_to_exclude = self.exclude_models
         model_name_list = list()
         for model_num in range(self.start, self.end, self.step):
@@ -65,6 +89,14 @@ class SbmlFetcher:
         return model_name_list
     
     def soup_scraper(self, model):
+        """Scrapes download URL
+
+        Args:
+            model (str): biomodel name eg:`BIOMD0000000001`
+
+        Returns:
+            str: returns download preview URL of particular model
+        """
         model_files_url = f"{self.base_url}/biomodels/{model}#Files"
         req_content = requests.get(model_files_url, headers=self.headers).text
         soup = BeautifulSoup(req_content, 'lxml')
@@ -73,6 +105,11 @@ class SbmlFetcher:
         return preview_url
 
     def download_sbml(self):
+        """Downloads model
+
+        Returns:
+            list: returns the list of downloaded model numbers in the BMDB naming format
+        """
         if self.start is None:
             self.start = self.get_latest_pub_model()
         for model in self.create_model_list():

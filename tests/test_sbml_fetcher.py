@@ -45,7 +45,7 @@ class SbmlFetcherTestCase(unittest.TestCase):
     
     def test_get_latest_pub_model_none(self):
         latest_model = self.sbml_fetcher.get_latest_pub_model()
-        self.assertEqual(latest_model, None)
+        self.assertEqual(latest_model, -1)
     
     def test_create_model_list(self):
         model_list = self.sbml_fetcher.create_model_list()
