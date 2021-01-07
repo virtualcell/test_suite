@@ -8,7 +8,7 @@ class OmexMakerTestCase(unittest.TestCase):
         omex_path='tests/fixtures',
         simulators=['vcell', 'copasi']
     )
-    def test_GenOmex(self):
+    def test_gen_omex(self):
         self.assertEqual(self.gen_archive.model_path, 'tests/fixtures')
         self.assertEqual(self.gen_archive.sedml_path, 'tests/fixtures')
         self.assertEqual(self.gen_archive.omex_path, 'tests/fixtures')

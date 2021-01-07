@@ -1,7 +1,7 @@
 # flake8: noqa
-from .config import Config
-from .utils.files_list import get_file_list
-from .combine.omex_maker import GenOmex
-from .comparator import *
-from .sbml import *
-from .sedml import *
+from report_generation.config import Config
+from report_generation.utils.files_list import get_file_list
+from report_generation.combine.omex_maker import GenOmex
+from report_generation.comparator import *
+from report_generation.sbml import *
+from report_generation.sedml import *

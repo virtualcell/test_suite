@@ -1,11 +1,12 @@
 import os
 
-__all__ = ['Config']
 
 class Config:
     """Config file
     """
     BASE_URL = 'https://www.ebi.ac.uk'
+    SEARCH_MODEL_URL = BASE_URL + '/biomodels/search?query=*%3A*+AND+curationstatus%3A%22Manually+curated%22&offset=0&numResults=10&sort=id-desc'
+    
     BASE_DIR = os.path.dirname(__file__)
     BASE_FILES_PATH = os.path.join(BASE_DIR, 'files')
 

@@ -159,3 +159,5 @@ report_generation/run_script/*.py
 
 tests/fixtures/copasi/*.omex
 tests/fixtures/vcell/*.omex
+
+tests/fixtures/test_download/*.xml

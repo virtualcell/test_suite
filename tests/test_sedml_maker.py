@@ -2,7 +2,7 @@ from report_generation.sedml import sedml_maker
 import unittest
 
 
-class SedmlMaker(unittest.TestCase):
+class SedmlMakerTestCase(unittest.TestCase):
     def test_create_vcell_sedml(self):
         create_sedml = sedml_maker.create_sedml(sbml_name='model_1',
                                                 simulator='vcell', initial_time=0,

@@ -3,7 +3,7 @@ from multiprocessing import Process
 from logzero import logger
 import fire
 from report_generation.combine.omex_maker import GenOmex
-from report_generation.sbml import download_sbml
+from report_generation.sbml import SbmlFetcher
 from report_generation.sedml.sedml_maker import gen_sedml
 from report_generation.comparator.report_comparator import ReportComparator
 
@@ -11,27 +11,47 @@ from report_generation.comparator.report_comparator import ReportComparator
 
     Usage:
         NAME
-        core.py - Downloads SBML files
+            core.py
+
         SYNOPSIS
-            core.py START END STEP <flags>
-        DESCRIPTION
-            Downloads SBML files
-        POSITIONAL ARGUMENTS
-            START
-                Start point
-            END
-                End point
-            STEP
-                Step to run the loop
-        FLAGS
-            --base_url=BASE_URL
-                base URL https://www.ebi.ac.uk. Defaults to Config.BASE_URL.
-            --headers=HEADERS
-                request headers for `https://www.ebi.ac.uk`. Defaults to Config.HEADERS.
-            --model_files_path=MODEL_FILES_PATH
-                path for SBML model files to download. Defaults to Config.MODEL_FILES_PATH.
-        NOTES
-            You can also use flags syntax for POSITIONAL ARGUMENTS
+            core.py - GROUP | COMMAND | VALUE
+
+        GROUPS
+            GROUP is one of the following:
+
+            exclude_models
+
+            headers
+
+        COMMANDS
+            COMMAND is one of the following:
+
+            create_model_list
+
+            download_sbml
+
+            get_latest_pub_model
+
+            soup_scraper
+
+        VALUES
+            VALUE is one of the following:
+
+            base_url
+
+            css_class
+
+            end
+
+            latest_pub_model
+
+            model_files_path
+
+            search_model_url
+
+            start
+
+            step
 """
 
 def run_sim(sh_path:str) -> int:
@@ -49,7 +69,7 @@ def run_sim(sh_path:str) -> int:
 if __name__ == '__main__':
     try:
         logger.debug("Download starting...")
-        fire.Fire(download_sbml)
+        fire.Fire(SbmlFetcher)
         logger.debug("Download finished...\n\n")
 
         logger.debug("Starting to generate SED-ML documents...")
